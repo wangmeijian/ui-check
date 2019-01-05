@@ -1,0 +1,30 @@
+{
+  "name": "ui-test",
+  "version": "0.1.0",
+  "description": "基于puppeteer的UI测试",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/360hnjd-fe/ui-test.git"
+  },
+  "keywords": [
+    "ui-test",
+    "puppeteer",
+    "test"
+  ],
+  "author": "undefined",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/360hnjd-fe/ui-test/issues"
+  },
+  "homepage": "https://github.com/360hnjd-fe/ui-test#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "pixelmatch": "^4.0.2",
+    "pngjs": "^3.3.3",
+    "puppeteer": "^1.11.0",
+    "url": "^0.11.0"
+  }
+}
