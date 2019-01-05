@@ -9,8 +9,6 @@ class UiCheck{
 	constructor(config){
 		this.config = config;
 		this.host = config.host;
-		this.username = config.username;
-		this.password = config.password;
 		this.router = config.router || {};
 		this.screenshotPath = config.screenshotPath || path.resolve(
 			process.cwd()
@@ -118,7 +116,7 @@ class UiCheck{
 		return this.router[new URL(this.page.url()).pathname];
 	}
 	async run(){
-		const { host, username, password, router, headless, screenshotPath } = this;
+		const { router, headless, screenshotPath } = this;
 		const _this = this;
 
 		try{
@@ -170,4 +168,4 @@ class UiCheck{
 	}
 }
 
-export default UiCheck;
+module.exports = UiCheck;

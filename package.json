@@ -1,6 +1,6 @@
 {
   "name": "ui-check",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "基于puppeteer的UI测试",
   "main": "index.js",
   "scripts": {},
@@ -11,9 +11,9 @@
   "keywords": [
     "ui-check",
     "puppeteer",
-    "test"
+    "ui test"
   ],
-  "author": "undefined",
+  "author": "wangmeijian",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/360hnjd-fe/ui-check/issues"
