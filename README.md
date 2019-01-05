@@ -13,29 +13,29 @@ npm install ui-check
 var UiCheck = require('ui-check');
 
 new UiCheck({
-	// 是否无界面，默认为true（不显示Chromium）
-	headless: true,
-	// 测试网站的根路径
-	host: 'https://github.com/',
-	// 需要测试的页面路由映射表
-	router: {
-		'/business': '业务',
-		'/trending': '趋势'
-	},
-	// 截图存放路径
-	screenshotPath: './',
-	// 页面窗口大小
-	pagesize: {
-		width: 1400,
-		height: 960
-	},
-	// 测试前初始化数据，登录什么的
-	beforeTest: (page) => {
-		return new Promise(async (resolve) => {
-			// ...
-			resolve();
-		})
-	}
+    // 是否无界面，默认为true（不显示Chromium）
+    headless: true,
+    // 测试网站的根路径
+    host: 'https://github.com/',
+    // 需要测试的页面路由映射表
+    router: {
+        '/business': '业务',
+        '/trending': '趋势'
+    },
+    // 截图存放路径
+    screenshotPath: './',
+    // 页面窗口大小
+    pagesize: {
+        width: 1400,
+        height: 960
+    },
+    // 测试前初始化数据，登录什么的
+    beforeTest: (page) => {
+        return new Promise(async (resolve) => {
+            // ...
+            resolve();
+        })
+    }
 })
 ```
 执行
