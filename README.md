@@ -1,6 +1,8 @@
 # ui-check
 基于puppeteer的UI测试工具
 
+利用Chromium浏览器环境自动化访问页面并截图、对比，监听页面崩溃、JS异常、请求异常
+
 ## 用法
 ```js
 npm install ui-check
@@ -11,6 +13,8 @@ npm install ui-check
 var UiCheck = require('ui-check');
 
 new UiCheck({
+	// 是否无界面，默认为true（不显示Chromium）
+	headless: true,
 	// 测试网站的根路径
 	host: 'https://github.com/',
 	// 需要测试的页面路由映射表
@@ -48,4 +52,4 @@ node ui-check.js
 2019-1-5 19:24:13: 截图完毕！存放目录：./ 
 ```
 
-每次执行node ui-check.js，生成的图片会跟上一次生成的结果对比，两次渲染结果不一致时，会将两张图片生成以```.diff.png```后缀的图片供查看
+每次执行```node ui-check.js```，生成的图片会跟上一次生成的结果对比，两次渲染结果不一致时，会将两张图片合成一张以```.diff.png```后缀的图片，差异点以红色像素标出
