@@ -5,7 +5,7 @@ const { PNG } = require('pngjs');
 const path = require('path');
 const pixelmatch = require('pixelmatch');
 
-class UiTest{
+class UiCheck{
 	constructor(config){
 		this.config = config;
 		this.host = config.host;
@@ -30,16 +30,11 @@ class UiTest{
 		this.run();
 	}
 	valid(){
-		const formatParams = ['host', 'username', 'password'];
-		const paramValid = [this.host, this.username, this.password].filter((param, index) => {
-			if(!param){
-				this.log(`Invalid parameters ${formatParams[index]}: string value expected`, 'red');
-				return false;
-			}
-			return true;
-		}).length === formatParams.length;
-
-		return paramValid;
+		if(!this.host){
+			this.log(`Invalid parameters host: string value expected`, 'red');
+			return false;
+		}
+		return true;
 	}
 	log(message, color='green'){
 		const colors = {
@@ -125,7 +120,7 @@ class UiTest{
 	async run(){
 		const { host, username, password, router, headless, screenshotPath } = this;
 		const _this = this;
-		console.log(headless);
+
 		try{
 			const browser = await puppeteer.launch({
 				headless
@@ -171,9 +166,8 @@ class UiTest{
 			await diff(screenshotPath);
 		}catch(error){
 			this.log(error, 'red');
-			process.exit();
 		}
 	}
 }
 
-export default UiTest;
+export default UiCheck;

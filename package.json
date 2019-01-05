@@ -1,24 +1,24 @@
 {
-  "name": "ui-test",
+  "name": "ui-check",
   "version": "0.1.0",
   "description": "基于puppeteer的UI测试",
   "main": "index.js",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/360hnjd-fe/ui-test.git"
+    "url": "git+https://github.com/360hnjd-fe/ui-check.git"
   },
   "keywords": [
-    "ui-test",
+    "ui-check",
     "puppeteer",
     "test"
   ],
   "author": "undefined",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/360hnjd-fe/ui-test/issues"
+    "url": "https://github.com/360hnjd-fe/ui-check/issues"
   },
-  "homepage": "https://github.com/360hnjd-fe/ui-test#readme",
+  "homepage": "https://github.com/360hnjd-fe/ui-check#readme",
   "dependencies": {
     "fs": "0.0.1-security",
     "path": "^0.12.7",
