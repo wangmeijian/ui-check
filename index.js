@@ -91,7 +91,7 @@ class UiCheck{
 		 
 		function doneReading() {
 		    if (++filesRead < 2) return;
-		    var diff = new PNG({width: preImage.width, height: preImage.height});
+		    const diff = new PNG({width: preImage.width, height: preImage.height});
 		 
 		    const numDiffPixels = pixelmatch(preImage.data, curImage.data, diff.data, preImage.width, preImage.height, {threshold: 0.1});
 		 	if(numDiffPixels > 0){
