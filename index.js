@@ -7,20 +7,27 @@ const pixelmatch = require('pixelmatch');
 
 class UiCheck{
 	constructor(config){
-		this.config = config;
-		this.host = config.host;
-		this.router = config.router || {};
-		this.screenshotPath = config.screenshotPath || path.resolve(
-			process.cwd()
-		);
-		this.headless = typeof config.headless === 'undefined' ? true : config.headless;
-		this.pagesize = config.pagesize || {
-			width: 1366,
-			height: 768
-		};
+		const options = {
+			beforeTest: () => {},
+			router: {},
+			headless: true,
+			pagesize: {
+				width: 1366,
+				height: 768
+			},
+			screenshotPath: path.resolve(
+				process.cwd()
+			),
+			...config
+		}
+		this.host = options.host;
+		this.router = options.router;
+		this.screenshotPath = options.screenshotPath; 
+		this.headless = options.headless;
+		this.pagesize = options.pagesize;
 		// 用于登录、初始化页面数据等
 		this.beforeTest = async(page) => {
-			await config.beforeTest ? config.beforeTest(page) : '';
+			await options.beforeTest(page);
 		}
 
 		if(!this.valid())return false;
