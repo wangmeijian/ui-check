@@ -15,12 +15,12 @@ class UiCheck{
 		);
 		this.headless = typeof config.headless === 'undefined' ? true : config.headless;
 		this.pagesize = config.pagesize || {
-			width: 1024,
+			width: 1366,
 			height: 768
 		};
 		// 用于登录、初始化页面数据等
 		this.beforeTest = async(page) => {
-			await config.beforeTest(page);
+			await config.beforeTest ? config.beforeTest(page) : '';
 		}
 
 		if(!this.valid())return false;
@@ -164,6 +164,7 @@ class UiCheck{
 			await diff(screenshotPath);
 		}catch(error){
 			this.log(error, 'red');
+			return false;
 		}
 	}
 }
