@@ -164,7 +164,6 @@ class UiCheck{
 			await diff(screenshotPath);
 		}catch(error){
 			this.log(error, 'red');
-			return false;
 		}
 	}
 }
