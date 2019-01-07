@@ -1,7 +1,7 @@
 # ui-check
 基于puppeteer的UI测试工具
 
-利用Chromium浏览器环境自动化访问页面并截图、对比，监听页面崩溃、JS异常、请求异常
+利用Chromium浏览器环境自动化访问页面并截图、对比，监听页面崩溃、JS异常、请求异常行为
 
 ## 用法
 ```js
@@ -67,7 +67,7 @@ new UiCheck({
     },
     // 测试前初始化数据，登录等操作
     // page即当前页面对象，API：https://github.com/GoogleChrome/puppeteer/blob/v1.10.0/docs/api.md#class-page
-    // beforeTest必须返回Promise对象
+    // beforeTest内做异步操作必须返回Promise对象
     beforeTest: (page) => {
         return new Promise(async (resolve) => {
             // ...

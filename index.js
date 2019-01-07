@@ -58,7 +58,7 @@ class UiCheck{
 		this.log(`截图 => ${name}`);
 		return this.page.screenshot({
 			path: path.resolve(this.screenshotPath, name),
-			fullpage: true
+			fullPage: true
 		})
 	}
 	updateFilename(path){
