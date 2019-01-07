@@ -29,7 +29,8 @@ new UiCheck({
         width: 1400,
         height: 960
     },
-    // 测试前初始化数据，登录什么的
+    // 测试前初始化数据，登录等操作
+    // page即当前页面对象，API：https://github.com/GoogleChrome/puppeteer/blob/v1.10.0/docs/api.md#class-page
     beforeTest: (page) => {
         return new Promise(async (resolve) => {
             // ...
