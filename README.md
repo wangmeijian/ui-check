@@ -47,6 +47,8 @@ node ui-check.js
 2019-1-7 10:57:12: 截图完毕！存放目录：./ 
 2019-1-7 10:57:13: 趋势.png和上一次渲染不一致，差异像素1061个，详情查看 => 趋势.diff.png
 ```
+
+如下图  
 ![](https://github.com/360hnjd-fe/ui-check/blob/master/example.png)
 
 ## API
