@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-const { URL } = require('url');
+const url = require('url');
 const { PNG } = require('pngjs');
 const path = require('path');
 const pixelmatch = require('pixelmatch');
@@ -91,9 +91,9 @@ class UiCheck{
 		 
 		function doneReading() {
 		    if (++filesRead < 2) return;
-		    const diff = new PNG({width: preImage.width, height: preImage.height});
-		 
+		    const diff = new PNG({width: preImage.width, height: preImage.height});		 
 		    const numDiffPixels = pixelmatch(preImage.data, curImage.data, diff.data, preImage.width, preImage.height, {threshold: 0.1});
+		    
 		 	if(numDiffPixels > 0){
 		 		let diffImgName = curImg.match(/[^\/]+(?=\.png)/)[0]+'.diff.png';
 		 		_this.log( `${curImg.match(/[^\/]+\.png$/)[0]}和上一次渲染不一致，差异像素${numDiffPixels}个，详情查看 => ${diffImgName}`, 'red' );
@@ -105,12 +105,11 @@ class UiCheck{
 	processAsync(router){
 		return new Promise(async (resolve, reject) => {
 			try{
-				for(let url in router){
-					let pageUrl = new URL(this.host);
-					pageUrl.pathname = url;
-					await this.page.goto(pageUrl.href);
+				for(let path in router){
+					let pageUrl = url.resolve(this.host, path);
+					await this.page.goto(pageUrl);
 					await this.timeout(2000);
-					await this.screenshot(router[url]);
+					await this.screenshot(router[path]);
 				}
 				resolve();
 			}catch(err){
@@ -120,7 +119,7 @@ class UiCheck{
 		})
 	}
 	getPageName(page){
-		return this.router[new URL(this.page.url()).pathname];
+		return this.router[new url.URL(this.page.url()).pathname];
 	}
 	async run(){
 		const { router, headless, screenshotPath } = this;
