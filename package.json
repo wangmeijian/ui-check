@@ -26,5 +26,14 @@
     "pngjs": "^3.3.3",
     "puppeteer": "^1.11.0",
     "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.4",
+    "@commitlint/config-conventional": "^8.3.4"
+  }
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }  
   }
 }
