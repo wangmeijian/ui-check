@@ -49,7 +49,7 @@ node ui-check.js
 ```
 
 如下图  
-![](https://github.com/360hnjd-fe/ui-check/blob/master/example.png)
+![](https://github.com/360hnjd-fe/ui-check/raw/master/example.png)
 
 ## API
 
