@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git+https://github.com/360hnjd-fe/ui-check.git"
   },
+  "bin": {
+    "uc": "./index.js"
+  },
   "keywords": [
     "ui-check",
     "puppeteer",
@@ -25,7 +28,8 @@
     "pixelmatch": "^4.0.2",
     "pngjs": "^3.3.3",
     "puppeteer": "^1.11.0",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "yargs": "^15.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.4",

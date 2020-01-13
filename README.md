@@ -5,10 +5,9 @@
 
 ## 用法
 ```js
-npm install ui-check
+npm install ui-check -g
 ```
 新建ui-check.js
-
 
 ```js
 const UiCheck = require('ui-check');
@@ -79,3 +78,9 @@ new UiCheck({
     }
 })
 ```
+
+## TODO
+
+* 增加自动识别路由（支持Vue、React）
+* 做成cli工具一键执行
+* 增加exclude配置，排除部分路由
