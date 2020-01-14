@@ -7,80 +7,86 @@
 ```js
 npm install ui-check -g
 ```
-新建ui-check.js
+新建配置文件config.js
 
 ```js
-const UiCheck = require('ui-check');
-
-new UiCheck({
-    // 测试网站的根路径
-    host: 'https://github.com/',
-    // 测试的页面路由
-    router: {
-        '/business': '业务',
-        '/trending': '趋势'
-    }
-})
+module.exports = {
+    // 根路径
+	base: "https://www.baidu.com/",
+	// 路由
+	router: {
+		"/s?wd=a": "page a",
+		"/s?wd=b": "page b"
+	}
+)
 ```
 执行
 
 ```
-node ui-check.js
+ui-check --config config.js
 ```
 
 输出日志：
 
 ```
-2019-1-7 10:56:50: 截图 => 业务.png 
-2019-1-7 10:56:55: 截图 => 趋势.png 
-2019-1-7 10:56:55: 截图完毕！存放目录：./
+ 17:07:09  截图 => page a.png 
+ 17:07:13  截图 => page b.png 
+ 17:07:13  截图完毕！存放目录：/Users/xxx/ui-check 
 ```
 
-第二次执行```node ui-check.js```，生成的图片会跟上一次生成的结果对比，两次渲染结果不一致时，会将两张图片合成一张```.diff.png```后缀的图片，差异点以红色像素标注，一目了然
+第二次执行```ui-check --config config.js```，生成的图片会跟上一次生成的结果对比，两次渲染结果不一致时，会将两张图片合成一张```.diff.png```后缀的图片，差异点以红色像素标注，一目了然
 
 输出日志：
 
 ```
-2019-1-7 10:57:07: 截图 => 业务.png 
-2019-1-7 10:57:12: 截图 => 趋势.png 
-2019-1-7 10:57:12: 截图完毕！存放目录：./ 
-2019-1-7 10:57:13: 趋势.png和上一次渲染不一致，差异像素1061个，详情查看 => 趋势.diff.png
+ 17:09:39  截图 => page a.png 
+ 17:09:43  截图 => page b.png 
+ 17:09:43  截图完毕！存放目录：/Users/wangmeijian/ui-check 
+ 17:09:45  page b.png和上一次渲染不一致，差异像素7470个，详情查看 => page b.diff.png
 ```
 
 如下图  
-![](https://github.com/360hnjd-fe/ui-check/raw/master/example.png)
+<img src="https://github.com/360hnjd-fe/ui-check/raw/master/example.png" width="800" />
 
 ## API
 
 ```js
-new UiCheck({
-    // 是否无界面，默认为true（不显示Chromium）
-    headless: true,
-    // 测试网站的根路径
-    host: '',
-    // 需要测试的页面路由
+module.exports = {
+    // 根路径
+    base: '',
+    // 路由
     router: {},
-    // 截图存放路径，默认为脚本执行路径
-    screenshotPath: '',
+    // 截图存放路径，默认为./ui-check
+    screenshot: '',
     // 页面分辨率，默认为1366*768
     pagesize: {
         width: 1366,
         height: 768
     },
-    // 测试前初始化数据，登录等操作
+    // 是否无界面，默认为true（不显示Chromium界面）
+    headless: true,
+    // 需要登录等操作，在这里实现
+    // beforeTest内做异步操作，需使用async await
     // page即当前页面对象，API：https://github.com/GoogleChrome/puppeteer/blob/v1.10.0/docs/api.md#class-page
-    // beforeTest内做异步操作必须返回Promise对象
-    beforeTest: (page) => {
-        return new Promise((resolve) => {
-            // ...
-            resolve();
-        })
+    beforeTest: async(page) => {
+        // const username = await page.$('#user')
+        // const password = await page.$('#password')
+        // const login = await page.$('#login')
+
+        // await username.type('admin')
+        // await password.type('123456')
+        // await login.click();
+        // // 或者直接设置cookie
+        // page.setCookie({
+        //     name: 'token',
+        //     value: 'xxxxxx'
+        // })
     }
-})
+}
 ```
 
 ## TODO
 
-* 增加自动识别路由（支持Vue、React）
 * 做成cli工具一键执行
+* 增加自动识别路由（支持Vue、React）
 * 增加exclude配置，排除部分路由
