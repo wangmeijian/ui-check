@@ -30,7 +30,9 @@ module.exports = {
 ui-check --config config.js
 ```
 
-输出日志：
+## 说明
+
+首次执行，输出日志：
 
 ```
  17:07:09  截图 => page a.png
