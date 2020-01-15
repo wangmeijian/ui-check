@@ -7,7 +7,7 @@ const program = require("commander");
 const path = require("path");
 
 program
-  .option("-b, --base <string>", "base url")
+  // .option("-b, --base <string>", "base url")
   .requiredOption("-c, --config <string>", "profile path");
 
 program.parse(process.argv);
