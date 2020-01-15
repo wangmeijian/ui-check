@@ -14,13 +14,13 @@ npm install ui-check -g
 
 ```js
 module.exports = {
-    // 根路径
-	base: "https://www.baidu.com/",
-	// 路由
-	router: {
-		"/s?wd=a": "page a",
-		"/s?wd=b": "page b"
-	}
+  // 根路径
+  base: "https://www.baidu.com/",
+  // 路由
+  router: {
+    "/s?wd=a": "page a",
+    "/s?wd=b": "page b"
+  }
 )
 ```
 
@@ -56,35 +56,35 @@ ui-check --config config.js
 
 ```js
 module.exports = {
-	// 根路径
-	base: "",
-	// 路由
-	router: {},
-	// 截图存放路径，默认为./ui-check
-	screenshot: "",
-	// 页面分辨率，默认为1366*768
-	pagesize: {
-		width: 1366,
-		height: 768
-	},
-	// 是否无界面，默认为true（不显示Chromium界面）
-	headless: true,
-	// 需要登录等操作，在这里实现
-	// beforeTest内做异步操作，需使用async await
-	// page即当前页面对象，API：https://github.com/GoogleChrome/puppeteer/blob/v1.10.0/docs/api.md#class-page
-	beforeTest: async page => {
-		// const username = await page.$('#user')
-		// const password = await page.$('#password')
-		// const login = await page.$('#login')
-		// await username.type('admin')
-		// await password.type('123456')
-		// await login.click();
-		// // 或者直接设置cookie
-		// await page.setCookie({
-		//     name: 'token',
-		//     value: 'xxxxxx'
-		// })
-	}
+  // 根路径
+  base: "",
+  // 路由
+  router: {},
+  // 截图存放路径，默认为./ui-check
+  screenshot: "",
+  // 页面分辨率，默认为1366*768
+  pagesize: {
+    width: 1366,
+    height: 768
+  },
+  // 是否无界面，默认为true（不显示Chromium界面）
+  headless: true,
+  // 需要登录等操作，在这里实现
+  // beforeTest内做异步操作，需使用async await
+  // page即当前页面对象，API：https://github.com/GoogleChrome/puppeteer/blob/v1.10.0/docs/api.md#class-page
+  beforeTest: async page => {
+    // const username = await page.$('#user')
+    // const password = await page.$('#password')
+    // const login = await page.$('#login')
+    // await username.type('admin')
+    // await password.type('123456')
+    // await login.click();
+    // // 或者直接设置cookie
+    // await page.setCookie({
+    //   name: 'token',
+    //   value: 'xxxxxx'
+    // })
+  }
 };
 ```
 
