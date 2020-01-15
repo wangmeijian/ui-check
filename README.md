@@ -77,7 +77,7 @@ module.exports = {
         // await password.type('123456')
         // await login.click();
         // // 或者直接设置cookie
-        // page.setCookie({
+        // await page.setCookie({
         //     name: 'token',
         //     value: 'xxxxxx'
         // })

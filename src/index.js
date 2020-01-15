@@ -22,7 +22,8 @@ class UiCheck{
 				process.cwd(), './ui-check'
 			),
 			...config
-		}
+    }
+    
     this.base = options.base;
     this.currentRouter = options.base;
 		this.router = {
@@ -33,8 +34,6 @@ class UiCheck{
 		this.headless = !!options.headless;
     this.pagesize = options.pagesize;
     
-    this.currentRouter = '';
-
     if (!this.valid()) return false;
 
 		try{
@@ -70,6 +69,7 @@ class UiCheck{
 	}
 	async screenshot(){
     let name = this.router[this.currentRouter];
+    
     if(!name)return;
 		name += '.png';
     log(`截图 => ${name}`);
@@ -190,6 +190,7 @@ class UiCheck{
 		await page.goto(this.base);
 		await waitForNavigation;
     await this.beforeTest(page);
+    delete router[this.base];
     await this.processAsync(router);
     await page.waitFor(1000);
 
