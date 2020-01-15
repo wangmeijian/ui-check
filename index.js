@@ -5,6 +5,8 @@ const UiCheck = require("./src/index");
 const { log } = require("./src/utils");
 const program = require("commander");
 const path = require("path");
+const os = require("os");
+const { exec } = require("child_process");
 
 program
   // .option("-b, --base <string>", "base url")
@@ -31,6 +33,42 @@ if (program.config && !pathReg.test(program.config)) {
 	);
   return false;
 }
+
+// 安装linux依赖
+if (os.type().toLowerCase() === 'linux'){
+    exec(
+        "sudo yum install -y",
+        [
+            "pango.x86_64",
+            "libXcomposite.x86_64",
+            "libXcursor.x86_64",
+            "libXdamage.x86_64",
+            "libXext.x86_64",
+            "libXi.x86_64",
+            "libXtst.x86_64",
+            "cups-libs.x86_64",
+            "libXScrnSaver.x86_64",
+            "libXrandr.x86_64",
+            "GConf2.x86_64",
+            "alsa-lib.x86_64",
+            "atk.x86_64",
+            "gtk3.x86_64",
+            "ipa-gothic-fonts",
+            "xorg-x11-fonts-100dpi",
+            "xorg-x11-fonts-75dpi",
+            "xorg-x11-utils",
+            "xorg-x11-fonts-cyrillic",
+            "xorg-x11-fonts-Type1",
+            "xorg-x11-fonts-misc"
+        ],
+        error => {
+            if (error) {
+                log(error, "red");
+            }
+        }
+    );
+}
+	
 
 const configPath = path.resolve(program.config);
 const config = require(configPath);
