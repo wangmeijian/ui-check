@@ -24,6 +24,7 @@
   "homepage": "https://github.com/360hnjd-fe/ui-check#readme",
   "dependencies": {
     "commander": "^4.1.0",
+    "cross-spawn": "^7.0.1",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
     "pixelmatch": "^4.0.2",

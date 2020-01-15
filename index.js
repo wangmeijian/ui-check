@@ -6,7 +6,7 @@ const { log } = require("./src/utils");
 const program = require("commander");
 const path = require("path");
 const os = require("os");
-const { exec } = require("child_process");
+const spawn = require("cross-spawn");
 
 program
   // .option("-b, --base <string>", "base url")
@@ -36,7 +36,7 @@ if (program.config && !pathReg.test(program.config)) {
 
 // 安装linux依赖
 if (os.type().toLowerCase() === 'linux'){
-    exec(
+    spawn(
         "sudo yum install -y",
         [
             "pango.x86_64",
@@ -61,10 +61,8 @@ if (os.type().toLowerCase() === 'linux'){
             "xorg-x11-fonts-Type1",
             "xorg-x11-fonts-misc"
         ],
-        error => {
-            if (error) {
-                log(error, "red");
-            }
+        {
+            stdio: "inherit"
         }
     );
 }
