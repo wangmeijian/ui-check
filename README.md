@@ -47,7 +47,7 @@ ui-check --config config.js
 ```
  17:09:39  截图 => page a.png
  17:09:43  截图 => page b.png
- 17:09:43  截图完毕！存放目录：/Users/wangmeijian/ui-check
+ 17:09:43  截图完毕！存放目录：/Users/xxx/ui-check
  17:09:45  page b.png和上一次渲染不一致，差异像素7470个，详情查看 => page b.diff.png
 ```
 
