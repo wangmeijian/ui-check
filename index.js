@@ -34,6 +34,13 @@ if (program.config && !pathReg.test(program.config)) {
   return false;
 }
 
+const main = () => {
+	const configPath = path.resolve(program.config);
+	const config = require(configPath);
+
+	new UiCheck(config);
+};
+
 // 安装linux依赖
 if (os.type().toLowerCase() === 'linux'){
     exec(
@@ -43,12 +50,12 @@ if (os.type().toLowerCase() === 'linux'){
                 log(error, 'red');
                 return;
             }
+            main();
         }
     );
+}else{
+    main();
 }
 	
 
-const configPath = path.resolve(program.config);
-const config = require(configPath);
 
-new UiCheck(config);
