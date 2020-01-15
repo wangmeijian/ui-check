@@ -21,7 +21,7 @@ module.exports = {
     "/s?wd=a": "page a",
     "/s?wd=b": "page b"
   }
-)
+}
 ```
 
 执行

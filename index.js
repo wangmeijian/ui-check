@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // const baseReg = /^http(s)?:\/\/(.*)/i
-const pathReg = /^[\.\w-/:\s\u4e00-\u9fa5]*[a-z]+\.[a-z]+$/i;
+const pathReg = /^.+\.[a-z]+$/i;
 const UiCheck = require("./src/index");
 const { log } = require("./src/utils");
 const program = require("commander");

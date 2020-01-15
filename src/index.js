@@ -167,6 +167,11 @@ class UiCheck {
 		const { router, headless } = this;
 		const _this = this;
 		const browser = await puppeteer.launch({
+			// for window
+			// https://github.com/puppeteer/puppeteer/blob/master/docs/troubleshooting.md
+			ignoreDefaultArgs: ["--disable-extensions"],
+			// for linux
+			args: ["--no-sandbox", "--disable-setuid-sandbox"],
 			headless
 		});
 		const page = await browser.newPage();
