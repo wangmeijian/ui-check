@@ -1,6 +1,6 @@
 {
   "name": "ui-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于puppeteer的UI测试工具",
   "main": "index.js",
   "scripts": {},
