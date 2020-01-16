@@ -24,12 +24,11 @@ class UiCheck {
 			...config
 		};
 
+		this.router = {
+			...options.router
+		};
 		this.base = options.base;
 		this.currentRouter = options.base;
-		this.router = {
-			...options.router,
-			[this.base]: options.router[this.base] || "base"
-		};
 		this.screenshotPath = path.resolve(options.screenshot);
 		this.headless = !!options.headless;
 		this.pagesize = options.pagesize;
@@ -43,41 +42,36 @@ class UiCheck {
 			this.updateFilename(this.screenshotPath);
 			this.run();
 		} catch (error) {
-			log(error, "red");
+			log.error(error);
 			process.exit();
 		}
 	}
 	validator(config) {
 		if (!config.base) {
-			log(`Invalid parameters base: string value expected`, "red");
+			log.error(`Invalid parameters base: string value expected`);
+			return false;
+		}
+		if (
+			typeof config.router === "string" &&
+			!fs.existsSync(path.resolve(config.router))
+		) {
+			log.error(`Invalid parameters router: the file does not exist`, "red");
 			return false;
 		}
 		return true;
 	}
-	timeout(delay) {
-		return new Promise((resolve, reject) => {
-			setTimeout(() => {
-				try {
-					resolve(1);
-				} catch (e) {
-					reject(0);
-				}
-			}, delay);
-		});
-	}
 	async screenshot() {
 		let name = this.router[this.currentRouter];
-
 		if (!name) return;
 		name += ".png";
-		log(`截图 => ${name}`);
+		log.success(`截图 => ${name}`);
 		try {
 			await this.page.screenshot({
 				path: path.resolve(this.screenshotPath, name),
 				fullPage: true
 			});
 		} catch (error) {
-			log(error, "red");
+			log.error(error);
 			process.exit();
 		}
 	}
@@ -122,11 +116,10 @@ class UiCheck {
 
 			if (numDiffPixels > 0) {
 				let diffImgName = curImg.match(/[^\/]+(?=\.png)/)[0] + ".diff.png";
-				log(
+				log.error(
 					`${
 						curImg.match(/[^\/]+\.png$/)[0]
-					}和上一次渲染不一致，差异像素${numDiffPixels}个，详情查看 => ${diffImgName}`,
-					"red"
+					}和上一次渲染不一致，差异像素${numDiffPixels}个，详情查看 => ${diffImgName}`
 				);
 				diff
 					.pack()
@@ -147,7 +140,7 @@ class UiCheck {
 		this.currentRouter = urls[0];
 		await this.page.goto(pageUrl);
 		await wait;
-		await this.page.waitFor(1000);
+		await this.screenshot();
 		if (Object.keys(router).length > 1) {
 			delete router[urls[0]];
 			await this.processAsync(router);
@@ -192,24 +185,20 @@ class UiCheck {
 		this.page = page;
 
 		page.on("error", () => {
-			log(`${this.getPageName(page)}：${page.url()} => 崩溃了！`, "red");
-		});
-		page.on("load", async () => {
-			await this.screenshot();
+			log.error(`${this.getPageName(page)}：${page.url()} => 崩溃了！`);
 		});
 		page.on("requestfailed", request => {
 			let errorText = request.failure().errorText;
-			// 页面跳转会取消请求，黄色提示即可
-			log(
-				`${this.getPageName(page)}：${request.url()} => 请求异常！${errorText}`,
-				errorText === "net::ERR_ABORTED" ? "yellow" : "red"
-			);
+			if (errorText !== "net::ERR_ABORTED") {
+				log.error(
+					`${this.getPageName(
+						page
+					)}：${request.url()} => 请求异常！${errorText}`
+				);
+			}
 		});
 		page.on("pageerror", error => {
-			log(
-				`${this.getPageName(page)}：${page.url()} => JS异常！${error}`,
-				"red"
-			);
+			log.error(`${this.getPageName(page)}：${page.url()} => JS异常！${error}`);
 		});
 
 		this.createDirectory();
@@ -217,11 +206,10 @@ class UiCheck {
 		await page.goto(this.base);
 		await waitForNavigation;
 		await this.beforeTest(page);
-		delete router[this.base];
 		await this.processAsync(router);
 		await page.waitFor(1000);
 
-		log(`截图完毕！存放目录：${this.screenshotPath}`);
+		log.success(`截图完毕！存放目录：${this.screenshotPath}`);
 		await browser.close();
 		// 图片比对
 		await diff(this.screenshotPath);

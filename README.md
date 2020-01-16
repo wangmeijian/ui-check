@@ -80,12 +80,9 @@ module.exports = {
   // beforeTest内做异步操作，需使用async await
   // page即当前页面对象，API：https://github.com/GoogleChrome/puppeteer/blob/v1.10.0/docs/api.md#class-page
   beforeTest: async page => {
-    // const username = await page.$('#user')
-    // const password = await page.$('#password')
-    // const login = await page.$('#login')
-    // await username.type('admin')
-    // await password.type('123456')
-    // await login.click();
+    // await page.type('#user', 'admin')
+    // await page.type('#password', '123456')
+    // await page.click('#login');
     // // 或者直接设置cookie
     // await page.setCookie({
     //   name: 'token',
