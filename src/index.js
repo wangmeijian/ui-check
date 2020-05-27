@@ -49,15 +49,12 @@ class UiCheck {
 	validator(config) {
 		if (!config.base) {
 			log.error(`Invalid parameters base: string value expected`);
-			return false;
-		}
-		if (
-			typeof config.router === "string" &&
-			!fs.existsSync(path.resolve(config.router))
-		) {
-			log.error(`Invalid parameters router: the file does not exist`, "red");
-			return false;
-		}
+			return;
+    }
+    if (Object.keys(this.router).length === 0) {
+      log.error(`Invalid parameters router: router is required`);
+      return;
+    };
 		return true;
 	}
 	async screenshot() {
